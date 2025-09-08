@@ -1,10 +1,10 @@
-# 📌 Base de Datos Relacional en PostgreSQL (Clientes y Pedidos)
+# Base de Datos Relacional en PostgreSQL (Clientes y Pedidos)
 
 Este documento explica los **componentes básicos de una base de datos relacional** y muestra ejemplos prácticos de **consultas SQL** utilizando **PostgreSQL** en **DBeaver**.
 
 ---
 
-## 🗂️ Componentes básicos de una base de datos relacional
+## Componentes básicos de una base de datos relacional
 
 - **Tablas**: estructuras que almacenan información (ej: `clientes`, `pedidos`).
 - **Campos (columnas)**: atributos de cada entidad (ej: nombre, email).
@@ -14,7 +14,7 @@ Este documento explica los **componentes básicos de una base de datos relaciona
 
 ---
 
-## ⚙️ Creación de Tablas
+## Creación de Tablas
 
 ```sql
 CREATE TABLE clientes (
@@ -36,11 +36,9 @@ CREATE TABLE pedidos (
 );
 ```
 
-📌 Relación: **Un cliente puede tener muchos pedidos, pero un pedido pertenece a un solo cliente**.  
-
 ---
 
-## 📥 Inserción de Datos de Ejemplo
+## Inserción de Datos de Ejemplo
 
 ```sql
 INSERT INTO clientes (nombre, email, telefono) VALUES
@@ -55,7 +53,7 @@ INSERT INTO pedidos (fecha, monto_total, cliente_id) VALUES
 
 ---
 
-## 🔍 Consultas SQL de Ejemplo
+## Consultas SQL de Ejemplo
 
 ### 1. Obtener todos los pedidos de un cliente específico
 ```sql
@@ -108,7 +106,7 @@ WHERE p.pedido_id IS NULL;
 
 ---
 
-## ✏️ Modificación de Datos (INSERT, UPDATE, DELETE)
+## Modificación de Datos (INSERT, UPDATE, DELETE)
 
 ### 1. Inserción de nuevos registros
 ```sql
@@ -145,15 +143,84 @@ DELETE FROM clientes
 WHERE cliente_id = 1;
 ```
 
+---
+
+## Implementación de DDL (CREATE, ALTER, DROP, TRUNCATE)
+
+### 1. Crear tabla de empleados
+```sql
+CREATE TABLE empleados (
+    empleado_id SERIAL PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    salario NUMERIC(10,2) NOT NULL,
+    fecha_ingreso DATE NOT NULL,
+    departamento VARCHAR(50)
+);
+```
+
+### 2. Modificar tabla existente (ALTER)
+```sql
+-- Agregar una nueva columna email
+ALTER TABLE empleados
+ADD COLUMN email VARCHAR(100);
+
+-- Cambiar el tipo de dato de salario a NUMERIC(12,2)
+ALTER TABLE empleados
+ALTER COLUMN salario TYPE NUMERIC(12,2);
+
+-- Eliminar la columna departamento:
+ALTER TABLE empleados
+DROP COLUMN departamento;
+```
 
 ---
 
-## ▶️ Cómo ejecutar en DBeaver
+## Diagrama Entidad-Relación (ER)
+
+El modelo de datos de la base de datos se puede representar con el siguiente diagrama ER:
+
+**Entidades y Relaciones:**
+
+1. **Clientes**
+   - `cliente_id` (PK)
+   - `nombre`
+   - `email`
+   - `telefono`
+
+2. **Pedidos**
+   - `pedido_id` (PK)
+   - `fecha`
+   - `monto_total`
+   - `cliente_id` (FK → Clientes.cliente_id)
+
+3. **Empleados** (opcional)
+   - `empleado_id` (PK)
+   - `nombre`
+   - `salario`
+   - `fecha_ingreso`
+   - `email`
+
+**Relaciones:**
+- **Clientes – Pedidos** → Uno a muchos
+  - Un cliente puede tener varios pedidos, pero un pedido pertenece a un único cliente.
+- **Empleados** → Puede ser independiente o más adelante relacionarse con pedidos si se desea registrar quién procesa cada pedido.
+
+---
+
+## Cómo ejecutar en DBeaver
 
 1. Abrir **DBeaver** y conectarse a PostgreSQL.  
 2. Crear una base de datos nueva (ejemplo: `empresa_db`).  
 3. Copiar y pegar el contenido de este archivo en un **SQL Editor**.  
 4. Ejecutar primero las secciones de **creación de tablas**, luego **inserción de datos** y finalmente las **consultas**.  
 5. Verificar los resultados en la pestaña **Data** de cada tabla.  
+
+---
+
+## Propósito
+
+- Practicar los conceptos fundamentales de **bases de datos relacionales**.  
+- Aprender a definir **relaciones entre tablas** mediante **claves foráneas**.  
+- Ejercitar consultas SQL utilizando **SELECT, WHERE, JOIN, GROUP BY, ORDER BY**.  
 
 ---

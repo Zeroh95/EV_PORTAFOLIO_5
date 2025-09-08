@@ -166,3 +166,34 @@ WHERE pedido_id = 2;
 
 DELETE FROM clientes
 WHERE cliente_id = 1;
+
+
+
+-- Implementar estructuras de datos relacionales utilizando lenguaje de definición de datos (DDL) a partir de un modelo de datos para la creación y mantención de las definiciones de los objetos de una base de datos.
+
+-- 1. Crear tabla de empleados
+
+CREATE TABLE empleados (
+    empleado_id SERIAL PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    salario NUMERIC(10,2) NOT NULL,
+    fecha_ingreso DATE NOT NULL,
+    departamento VARCHAR(50)
+);
+
+-- 2. Modificar tabla existente (ALTER)
+
+-- Agregar una nueva columna email:
+
+ALTER TABLE empleados
+ADD COLUMN email VARCHAR(100);
+
+-- Cambiar el tipo de dato de salario a NUMERIC(12,2):
+
+ALTER TABLE empleados
+ALTER COLUMN salario TYPE NUMERIC(12,2);
+
+-- Eliminar la columna departamento:
+
+ALTER TABLE empleados
+DROP COLUMN departamento;
