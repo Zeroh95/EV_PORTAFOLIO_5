@@ -4,6 +4,16 @@ Este documento explica los **componentes básicos de una base de datos relaciona
 
 ---
 
+## 🗂️ Componentes básicos de una base de datos relacional
+
+- **Tablas**: estructuras que almacenan información (ej: `clientes`, `pedidos`).
+- **Campos (columnas)**: atributos de cada entidad (ej: nombre, email).
+- **Registros (filas)**: instancias de datos en una tabla.
+- **Clave primaria (PK)**: identifica de manera única un registro.
+- **Clave foránea (FK)**: conecta una tabla con otra, estableciendo relaciones.
+
+---
+
 ## ⚙️ Creación de Tablas
 
 ```sql
@@ -26,11 +36,11 @@ CREATE TABLE pedidos (
 );
 ```
 
-Relación: **Un cliente puede tener muchos pedidos, pero un pedido pertenece a un solo cliente**.  
+📌 Relación: **Un cliente puede tener muchos pedidos, pero un pedido pertenece a un solo cliente**.  
 
 ---
 
-## Inserción de Datos de Ejemplo
+## 📥 Inserción de Datos de Ejemplo
 
 ```sql
 INSERT INTO clientes (nombre, email, telefono) VALUES
@@ -45,7 +55,7 @@ INSERT INTO pedidos (fecha, monto_total, cliente_id) VALUES
 
 ---
 
-## Consultas SQL de Ejemplo
+## 🔍 Consultas SQL de Ejemplo
 
 ### 1. Obtener todos los pedidos de un cliente específico
 ```sql
@@ -98,7 +108,47 @@ WHERE p.pedido_id IS NULL;
 
 ---
 
-## Cómo ejecutar en DBeaver
+## ✏️ Modificación de Datos (INSERT, UPDATE, DELETE)
+
+### 1. Inserción de nuevos registros
+```sql
+-- Insertar un nuevo cliente
+INSERT INTO clientes (nombre, email, telefono)
+VALUES ('Carla Soto', 'carla.soto@mail.com', '945678321');
+
+-- Insertar un pedido para ese cliente (cliente_id = 3)
+INSERT INTO pedidos (fecha, monto_total, cliente_id)
+VALUES ('2025-09-05', 18000, 3);
+```
+
+### 2. Actualización de registros existentes
+```sql
+-- Actualizar email de un cliente
+UPDATE clientes
+SET email = 'luis.gomez2025@mail.com'
+WHERE nombre = 'Luis Gómez';
+
+-- Actualizar monto total de un pedido
+UPDATE pedidos
+SET monto_total = 20000
+WHERE pedido_id = 3;
+```
+
+### 3. Eliminación de registros
+```sql
+-- Eliminar un pedido no procesado
+DELETE FROM pedidos
+WHERE pedido_id = 2;
+
+-- Eliminar un cliente y sus pedidos asociados (ON DELETE CASCADE)
+DELETE FROM clientes
+WHERE cliente_id = 1;
+```
+
+
+---
+
+## ▶️ Cómo ejecutar en DBeaver
 
 1. Abrir **DBeaver** y conectarse a PostgreSQL.  
 2. Crear una base de datos nueva (ejemplo: `empresa_db`).  

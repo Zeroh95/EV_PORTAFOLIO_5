@@ -130,3 +130,39 @@ SELECT c.nombre, c.email
 FROM clientes c
 LEFT JOIN pedidos p ON c.cliente_id = p.cliente_id
 WHERE p.pedido_id IS NULL;
+
+-- Utilizar lenguaje de manipulación de datos (DML) para la modificación de los datos existentes en una base de datos dando solución a un problema planteado.
+
+-- Inserción de datos (INSERT)
+
+-- Insertar un nuevo cliente
+
+INSERT INTO clientes (nombre, email, telefono)
+VALUES ('Carla Soto', 'carla.soto@mail.com', '945678321');
+
+-- Insertar un pedido para ese cliente (cliente_id = 3)
+
+INSERT INTO pedidos (fecha, monto_total, cliente_id)
+VALUES ('2025-09-05', 18000, 3);
+
+-- Modificar la dirección de correo de un cliente (ejemplo: actualizar el email de Luis Gómez):
+
+UPDATE clientes
+SET email = 'luis.gomez2025@mail.com'
+WHERE nombre = 'Luis Gómez';
+
+-- Actualizar el monto total de un pedido específico:
+
+UPDATE pedidos
+SET monto_total = 20000
+WHERE pedido_id = 3;
+
+-- Eliminar un pedido que no fue procesado:
+
+DELETE FROM pedidos
+WHERE pedido_id = 2;
+
+-- Eliminar un cliente y todos sus pedidos asociados (gracias a la cláusula ON DELETE CASCADE definida en la FK):
+
+DELETE FROM clientes
+WHERE cliente_id = 1;
