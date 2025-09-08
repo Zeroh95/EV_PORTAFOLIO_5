@@ -216,11 +216,3 @@ El modelo de datos de la base de datos se puede representar con el siguiente dia
 5. Verificar los resultados en la pestaña **Data** de cada tabla.  
 
 ---
-
-## Propósito
-
-- Practicar los conceptos fundamentales de **bases de datos relacionales**.  
-- Aprender a definir **relaciones entre tablas** mediante **claves foráneas**.  
-- Ejercitar consultas SQL utilizando **SELECT, WHERE, JOIN, GROUP BY, ORDER BY**.  
-
----
